@@ -1,26 +1,25 @@
-% thelongcat-report.cls
 % A custom report class for producing a lab report
 
 \NeedsTeXFormat{LaTeX2e} % Latest LaTeX format
-\ProvidesClass{thelongcat-report}[2023/04/24] % Class name and version
+\ProvidesClass{thelongcat-report}[2024/03/22] % Class name and version
 
 % Read in parameters and load the article class
 \DeclareOption{10pt}{\def\customfontsize{10pt}}
 \DeclareOption{11pt}{\def\customfontsize{11pt}}
 \DeclareOption{12pt}{\def\customfontsize{12pt}}
 \DeclareOption{defaultAuthor}{
-\def\whoami{NAME (ABCDXXXX)}
-\def\spaceReduction{}
+	\def\whoami{The Long Cat}
+	\def\spaceReduction{}
 }
 \DeclareOption{noDefaultAuthor}{
-\def\whoami{}
-\def\spaceReduction{\vspace{-2em}}
+	\def\whoami{}
+	\def\spaceReduction{\vspace{-2em}}
 }
 \DeclareOption{noTightTitle}{
-\def\trimTitleSpace{}
+	\def\trimTitleSpace{}
 }
 \DeclareOption{tightTitle}{
-\def\trimTitleSpace{\vspace{-3.5em}}
+	\def\trimTitleSpace{\vspace{-3.5em}}
 }
 
 % Default: 12pt font
@@ -51,21 +50,23 @@
 \RequirePackage{gensymb} % Gives symbols such as degree symbol (º)
 \RequirePackage{siunitx} % Provides unit annotation
 \RequirePackage{array} % Centered justified columns in tabular
+\RequirePackage{bm} % Bold symbols not supported by \mathbf
+\RequirePackage{multicol} % Provides multi-column layout
 %%%
 
 %% Set geometry of the class
-\geometry{a4paper, portrait, left=2.5cm, right=2.5cm, bottom=2.5cm}
+\geometry{a4paper, portrait, left=1.5cm, right=1.5cm, top=2.5cm, bottom=2.5cm}
 
 \newcommand{\reporttitle}[2]{
-  \pagestyle{fancy}
-  \fancyhf{}
-  \renewcommand{\headrulewidth}{0pt} % Remove header rule
-  \lhead{#1 Report}
-  \rhead{\today}
-  \cfoot{\thepage}
-  \title{\trimTitleSpace#1: #2\spaceReduction}
-  \author{\whoami}
-  \date{Date: \today}
+	\pagestyle{fancy}
+	\fancyhf{}
+	\renewcommand{\headrulewidth}{0pt} % Remove header rule
+	\lhead{#1 Report}
+	\rhead{\today}
+	\cfoot{\thepage}
+	\title{\trimTitleSpace#1: #2\spaceReduction}
+	\author{\whoami}
+	\date{Date: \today}
 }
 
 % Reference: https://tex.stackexchange.com/a/5020
@@ -82,5 +83,5 @@
 % Setup diagonal fractions
 % Reference: https://tex.stackexchange.com/a/251123
 \newcommand{\diagfrac}[2]{
-  {{}^{#1}{\mskip -5mu/\mskip -3mu}_{#2}}
+	{{}^{#1}{\mskip -5mu/\mskip -3mu}_{#2}}
 }
