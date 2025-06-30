@@ -1,0 +1,67 @@
+\documentclass[11pt, tightTitle]{thelongcat-report}
+
+% Setup column separation length
+\setlength{\columnsep}{.8cm}
+% Small font for captions
+\captionsetup{font=small}
+
+\usepackage[style=nature, giveninits=true]{biblatex}
+\addbibresource{references.bib}
+% Small font for references
+\renewcommand*{\bibfont}{\small}
+% Set graphics path for better file management
+\graphicspath{{./Images/}}
+\reporttitle{Course Code}{Course Name}
+
+% Reference: https://gist.github.com/Liam0205/014661fe1fb0c337bfa0dd3242430015
+% Extra %'s are needed to avoid whitespaces: https://tex.stackexchange.com/a/33589
+\newlength\wttlinewidth
+\setlength{\wttlinewidth}{0.4pt}
+\newenvironment{widetext}[1][2]{%
+	\gdef\savedcolnum{#1}
+	\noindent\hspace{\dimexpr(.5\textwidth+.5\columnsep)}
+	\rule{\dimexpr(.5\textwidth-.5\columnsep-\wttlinewidth)}{\wttlinewidth}%
+	\rule{\wttlinewidth}{0.5\baselineskip}%
+}{%
+	\rule{\wttlinewidth}{0.5\baselineskip}%\hspace{-3.5pt}
+	\rule[0.5\baselineskip]
+	{\dimexpr(0.5\textwidth-0.5\columnsep-\wttlinewidth)}{\wttlinewidth}%
+}
+\BeforeBeginEnvironment{widetext}{\end{multicols}}
+\AfterEndEnvironment{widetext}{\begin{multicols}{\savedcolnum}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+	\label{sec:abstract}
+	\input{abstract.tex}
+\end{abstract}
+
+\begin{multicols}{2}
+	\section{Introduction}
+	\label{sec:introduction}
+	\input{introduction.tex}
+
+	\section{Theory}
+	\label{sec:theory}
+	\input{theory.tex}
+
+	\section{Implementation}
+	\label{sec:implementation}
+	\input{implementation.tex}
+
+	\section{Results and Discussion}
+	\label{sec:results}
+	\input{results.tex}
+
+	\section{Conclusion}
+	\label{sec:conclusion}
+	\input{conclusion.tex}
+
+	\printbibliography
+\end{multicols}
+
+\appendix
+\InputIfFileExists{appendix.tex}{}{}
+\end{document}
