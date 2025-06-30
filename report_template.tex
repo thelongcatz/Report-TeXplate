@@ -1,23 +1,48 @@
-\documentclass{thelongcat-report}
+\documentclass[11pt]{thelongcat-report}
+
+% multibib for not-cited bibliographies
+% Reference: https://www.overleaf.com/learn/latex/Multibib
+% resetlabels to reset numbering for each bibliography
+\usepackage[resetlabels]{multibib}
+\newcites{Bib}{Bibliography}
+% Set graphics path for better file management
+\graphicspath{{./Images/}}
 \reporttitle{Course Code}{Course Name}
 
 \begin{document}
 \maketitle
-\section{Abstract}
+
+\begin{abstract}
+\label{sec:abstract}
 \input{abstract.tex}
+\end{abstract}
 
-\section{Aim and Method}
-\input{aim.tex}
+\section{Introduction}
+\label{sec:introduction}
+\input{introduction.tex}
 
-\section{Results}
+\section{Theory}
+\label{sec:theory}
+\input{theory.tex}
+
+\section{Methodology}
+\label{sec:methodology}
+\input{methodology.tex}
+
+\section{Results and Discussion}
+\label{sec:results}
 \input{results.tex}
 
 \section{Conclusion}
+\label{sec:conclusion}
 \input{conclusion.tex}
 
-\begin{thebibliography}{1}
-\input{references.tex}
-\end{thebibliography}
+\bibliography{references}
+\bibliographystyle{abbrv}
+
+\nociteBib{*} % Include all entries from bibliography.bib
+\bibliographyBib{bibliography}
+\bibliographystyleBib{abbrv}
 
 \appendix
 \InputIfFileExists{appendix.tex}{}{}
