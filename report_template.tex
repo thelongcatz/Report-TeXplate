@@ -1,0 +1,24 @@
+\documentclass{thelongcat-report}
+\reporttitle{Course Code}{Course Name}
+
+\begin{document}
+\maketitle
+\section{Abstract}
+\input{abstract.tex}
+
+\section{Aim and Method}
+\input{aim.tex}
+
+\section{Results}
+\input{results.tex}
+
+\section{Conclusion}
+\input{conclusion.tex}
+
+\begin{thebibliography}{1}
+\input{references.tex}
+\end{thebibliography}
+
+\appendix
+\InputIfFileExists{appendix.tex}{}{}
+\end{document}
