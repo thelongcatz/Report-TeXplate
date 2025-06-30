@@ -2,7 +2,7 @@
 % A custom report class for producing a lab report
 
 \NeedsTeXFormat{LaTeX2e} % Latest LaTeX format
-\ProvidesClass{thelongcat-report}[2023/03/21] % Class name and version
+\ProvidesClass{thelongcat-report}[2023/04/20] % Class name and version
 
 % Read in parameters and load the article class
 \DeclareOption{10pt}{\def\customfontsize{10pt}}
@@ -16,11 +16,18 @@
 \def\whoami{}
 \def\spaceReduction{\vspace{-2em}}
 }
+\DeclareOption{noTightTitle}{
+\def\trimTitleSpace{}
+}
+\DeclareOption{tightTitle}{
+\def\trimTitleSpace{\vspace{-3.5em}}
+}
 
 % Default: 12pt font
 % Reference: https://stackoverflow.com/a/55002538
 \ExecuteOptions{12pt}
 \ExecuteOptions{defaultAuthor}
+\ExecuteOptions{noTightTitle}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 \PassOptionsToClass{\customfontsize}{article}
@@ -43,6 +50,7 @@
 \RequirePackage{subcaption} % Gives sub-figure and sub-caption environments
 \RequirePackage{gensymb} % Gives symbols such as degree symbol (º)
 \RequirePackage{siunitx} % Provides unit annotation
+\RequirePackage{array} % Centered justified columns in tabular
 %%%
 
 %% Set geometry of the class
@@ -55,7 +63,14 @@
   \lhead{#1 Report}
   \rhead{\today}
   \cfoot{\thepage}
-  \title{#1: #2\spaceReduction}
+  \title{\trimTitleSpace#1: #2\spaceReduction}
   \author{\whoami}
   \date{Date: \today}
 }
+
+% Reference: https://tex.stackexchange.com/a/5020
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+
+% Set larger \headheight to silence fancyhdr warning
+% See https://tex.stackexchange.com/a/327298
+\setlength{\headheight}{13.59999pt}
