@@ -2,7 +2,7 @@
 % A custom report class for producing a lab report
 
 \NeedsTeXFormat{LaTeX2e} % Latest LaTeX format
-\ProvidesClass{thelongcat-report}[2023/04/20] % Class name and version
+\ProvidesClass{thelongcat-report}[2023/04/24] % Class name and version
 
 % Read in parameters and load the article class
 \DeclareOption{10pt}{\def\customfontsize{10pt}}
@@ -74,3 +74,13 @@
 % Set larger \headheight to silence fancyhdr warning
 % See https://tex.stackexchange.com/a/327298
 \setlength{\headheight}{13.59999pt}
+
+% Separate uncertainty explicitly
+% See https://tex.stackexchange.com/a/27707
+\sisetup{separate-uncertainty=true}
+
+% Setup diagonal fractions
+% Reference: https://tex.stackexchange.com/a/251123
+\newcommand{\diagfrac}[2]{
+  {{}^{#1}{\mskip -5mu/\mskip -3mu}_{#2}}
+}
